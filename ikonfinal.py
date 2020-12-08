@@ -17,22 +17,29 @@ def monitor(email, password, headless, resort, month, day, row):
 
     time.sleep(3)
     driver.get('https://account.ikonpass.com/en/login')
+    print('Initiating Sign In')
     time.sleep(1)
     driver.find_element_by_name('email').send_keys(email)
+    print('Inputting Email')
     time.sleep(1)
     driver.find_element_by_name('password').send_keys(password)
+    print('Inputting Passowrd')
     time.sleep(1)
     driver.find_element_by_xpath('//*[@id="scrolling-body"]/section/div/div/div/div[1]/div/div/div[1]/div/form/button').click()
+    print('Successfully Signed In')
     avaliable = False
     time.sleep(5)
     driver.get('https://account.ikonpass.com/en/myaccount/add-reservations/')
     time.sleep(2)
+    print('Finding Resort')
     driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[1]/div[1]/div/div/div[1]/input').send_keys(resort) #selecting resort
     time.sleep(2)
     driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[1]/div[1]/div/div/div[2]/div[1]/div/ul/li').click()#selecting resort
     time.sleep(2)
     driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[2]/button').click()#selecting resort
+    print('Resort Found')
     time.sleep(1)
+    print('Going to Month')
     for i in range(month):
         time.sleep(.25)
         driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[3]/div[1]/div[1]/div[1]/div/div[1]/div[2]/button[2]').click()
@@ -40,7 +47,7 @@ def monitor(email, password, headless, resort, month, day, row):
     j=0
     while avaliable == False:
         if j == 15:
-            print(f'[{time.strftime("%H:%M:%S")}] resetting')
+            print(f'[{time.strftime("%H:%M:%S")}] Resetting')
             driver.quit()
             return(False)
         if i == 3:
@@ -50,12 +57,15 @@ def monitor(email, password, headless, resort, month, day, row):
             print(f'[{time.strftime("%H:%M:%S")}] Refresh')
             time.sleep(3)
             try:
+                print('Finding Resort')
                 driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[1]/div[1]/div/div/div[1]/input').send_keys(resort) #selecting resort
                 time.sleep(2)
                 driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[1]/div[1]/div/div/div[2]/div[1]/div/ul/li').click()#selecting resort
                 time.sleep(2)
                 driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[2]/button').click()#selecting resort
-                time.sleep(2)
+                print('Resort Found')
+                time.sleep(1)
+                print('Going to Month')
                 for i in range(month):
                     time.sleep(.25)
                     driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[3]/div[1]/div[1]/div[1]/div/div[1]/div[2]/button[2]').click()            
@@ -68,6 +78,7 @@ def monitor(email, password, headless, resort, month, day, row):
 
 
         time.sleep(1)
+        print('Finding Day')
         driver.find_element_by_xpath(f'/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[3]/div[1]/div[1]/div[1]/div/div[2]/div/div[2]/div[{str(row)}]/div[{str(day)}]').click() #the day I want to reserve
         time.sleep(5)
         try:
@@ -79,23 +90,24 @@ def monitor(email, password, headless, resort, month, day, row):
             print('Unavaliable')
             time.sleep(2)
         else:
-            print(f'[{time.strftime("%H:%M:%S")}] resetting')
+            print(f'[{time.strftime("%H:%M:%S")}] Resetting')
             driver.quit()
             return(False)
     
         i+=1
     if avaliable == True:
         try:
+            print('Attempting To Reserve')
             time.sleep(2)
             driver.find_element_by_xpath('//*[@id="root"]/div/div/main/section[2]/div/div[2]/div[3]/div[2]/button').click()
             time.sleep(1)
             driver.find_element_by_xpath('//*[@id="root"]/div/div/main/section[2]/div/div[2]/div[4]/div/div[4]/label/input').click()
             time.sleep(1)
             driver.find_element_by_xpath('//*[@id="root"]/div/div/main/section[2]/div/div[2]/div[4]/div/div[5]/button').click()
-            print('Complete')
+            print('Reservation Successful')
             return(True)
         except:
-            print(f'[{time.strftime("%H:%M:%S")}] resetting')
+            print(f'[{time.strftime("%H:%M:%S")}] Resetting')
             driver.quit()
             return(False)
 def run():
