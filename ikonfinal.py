@@ -23,7 +23,7 @@ def monitor(email, password, headless, resort, month, day, row):
     print('Inputting Email')
     time.sleep(1)
     driver.find_element_by_name('password').send_keys(password)
-    print('Inputting Passowrd')
+    print('Inputting Password')
     time.sleep(1)
     driver.find_element_by_xpath('//*[@id="scrolling-body"]/section/div/div/div/div[1]/div/div/div[1]/div/form/button').click()
     print('Successfully Signed In')
@@ -89,10 +89,6 @@ def monitor(email, password, headless, resort, month, day, row):
             driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[3]/div[1]/div[2]/div/div[2]/div[3]/button').click()
             print('Unavaliable')
             time.sleep(2)
-        else:
-            print(f'[{time.strftime("%H:%M:%S")}] Resetting')
-            driver.quit()
-            return(False)
     
         i+=1
     if avaliable == True:
