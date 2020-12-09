@@ -20,10 +20,11 @@ def monitor(email, password, headless, resort, month, day, row):
     print('Initiating Sign In')
     time.sleep(1)
     driver.find_element_by_name('email').send_keys(email)
-    print('Inputting Email')
+    print(f'Inputting Email: {email}')
     time.sleep(1)
     driver.find_element_by_name('password').send_keys(password)
-    print('Inputting Password')
+    print(f'Inputting Password: ', end = ' ')
+    print(len(password)*'*')
     time.sleep(1)
     driver.find_element_by_xpath('//*[@id="scrolling-body"]/section/div/div/div/div[1]/div/div/div[1]/div/form/button').click()
     print('Successfully Signed In')
@@ -37,7 +38,7 @@ def monitor(email, password, headless, resort, month, day, row):
     driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[1]/div[1]/div/div/div[2]/div[1]/div/ul/li').click()#selecting resort
     time.sleep(2)
     driver.find_element_by_xpath('/html/body/div[3]/div/div/main/section[2]/div/div[2]/div[2]/div[2]/button').click()#selecting resort
-    print('Resort Found')
+    print(f'Resort Found: {resort}')
     time.sleep(1)
     print('Going to Month')
     for i in range(month):
