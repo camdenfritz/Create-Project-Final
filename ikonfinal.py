@@ -4,7 +4,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 from selenium.webdriver.chrome.options import Options
+from discord_webhook import DiscordWebhook
 
+def discord_webhook(link, resort, day, month):
+    webhook = DiscordWebhook(url=link, content='Your Reservations on\n' + month + ' ' + str(day) + '\n@' + resort + '\nHas been successful')
+    webhook.execute()
 
 def monitor(email, password, headless, resort, month, day, row):
     options = Options()
@@ -130,6 +134,13 @@ def run():
 
     end = False
     headless = input('Do You Want This Process Headless?> ')
+    discord_input = input('Would You Like a Discord Notification Upon Success?> ')
+    discord_bool = False
+
+    if 'y' in discord_input:
+        discord_link = input('Enter Discord Webhook> ')
+        discord_bool = True
+
     emaii = input('Ikon Email> ')
     password = input('Ikon Password> ')
     resort = input('What Resort are you Traveling To?> ')
@@ -145,5 +156,8 @@ def run():
 
     while end == False:
         end = monitor(emaii, password, headless, resort, click_through, day_of_week, row)
+    
+    if discord_bool == True and end == True:
+        discord_webhook(discord_link, resort, date, month_travel)
     
 run()
