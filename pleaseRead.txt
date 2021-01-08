@@ -1,0 +1,12 @@
+Hi welcome to my project!
+I uploaded this to github as well 
+https://github.com/camdenfritz/Create-Project-Final
+I would give an example execution but that would require me sharing my ikon pass information
+which i am not comfortable doing and it would not work since I have maximized my reservation days. 
+If this is an issue please reach out but I believe it shouldnt be too difficult finding someone with an ikon pass :)
+A chrome driver needs to be downloaded as well as pip install selenium, all in the readme
+My last request is to minimize sharing this code as I'd like to abuse it personally and if
+ikon catches on they may make changes to their website, and it would be shame if I had to go back to 
+checking the website every hour.
+Hope you enjoy the project, if you have any difficulties reach out to me 
+camdenfritz@mymail.mines.edu

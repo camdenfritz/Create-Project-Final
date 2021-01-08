@@ -6,7 +6,7 @@ import time
 from selenium.webdriver.chrome.options import Options
 from discord_webhook import DiscordWebhook
 
-def discord_webhook(link, resort, day, month):
+def discord_webhook_success(link, resort, day, month):
     webhook = DiscordWebhook(url=link, content='Your Reservations on\n' + month + ' ' + str(day) + '\n@' + resort + '\nHas been successful')
     webhook.execute()
 
@@ -114,10 +114,10 @@ def monitor(email, password, headless, resort, month, day, row):
 def run():
     months = {
         'december': 0,
-        'january':1,
-        'february':2,
-        'march':3,
-        'april':4
+        'january':0,
+        'february':1,
+        'march':2,
+        'april':3
     }
     days_of_week = {
         'sunday':1,
@@ -158,6 +158,6 @@ def run():
         end = monitor(emaii, password, headless, resort, click_through, day_of_week, row)
     
     if discord_bool == True and end == True:
-        discord_webhook(discord_link, resort, date, month_travel)
+        discord_webhook_success(discord_link, resort, date, month_travel)
     
 run()
